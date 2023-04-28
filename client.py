@@ -280,4 +280,4 @@ async def foo():
 
 # get token from .env file in same directory
 m.client.run(
-  "Nzk2NzcxNjUwNjc3ODk5Mjc1.GApZH3.MFLwnQ-Y0lnAfSN-_ONggGf7ReScvoB7M60tmI")
+  "")
