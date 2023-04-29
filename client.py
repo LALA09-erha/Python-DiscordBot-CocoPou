@@ -235,47 +235,42 @@ async def jadwal_bola():
 async def foo():
   # auto update yt
   nub = random.randint(0, 25)
-  try:
-    alldata_yt = connection.getdata_yt()
-    for data in alldata_yt:
-      # get link videos from api and compare with database
-      user = data[1]
-      link_new = a.api(user)
-      if link_new != data[2]:
-        title = a.gettitle(user)
-        # update database
-        connection.checkupdate_yt(link_new, data[0])
-        # send message
-        channel = m.client.get_channel(int(data[4]))
-        await channel.send(
-          f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```New Video! \n{title}``` {link_new}"
-        )
-  except :
-    try:
-      link_stream = a.getstream(user)
-      # get link stream from api and compare with database
-      if link_stream[0] != data[6]:
-        # update database
-        connection.checkupdate_ytlive(link_stream[0], data[0])
-        # send message
-        channel = m.client.get_channel(int(data[4]))
-        await channel.send(
-          f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```Live Stream Video! \n{link_stream[1]}``` {link_stream[0]}"
-        )
-    except:
-      try:
-        # get short link from api and compare with database
-        link_short = a.getshort(user)
-        if link_short[0] != data[7]:
-          # update database
-          connection.checkupdate_ytsr(link_short[0], data[0])
-          # send message
-          channel = m.client.get_channel(int(data[4]))
-          await channel.send(
-            f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```New Shorts! \n{link_short[1]}``` {link_short[0]}"
-          )
-      except:
-        pass
+
+  alldata_yt = connection.getdata_yt()
+  for data in alldata_yt:
+    # get link videos from api and compare with database
+    user = data[1]
+    link_new = a.api(user)
+    if link_new != data[2]:
+      title = a.gettitle(user)
+      # update database
+      connection.checkupdate_yt(link_new, data[0])
+      # send message
+      channel = m.client.get_channel(int(data[4]))
+      await channel.send(
+        f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```New Video! \n{title}``` {link_new}"
+      )
+  link_stream = a.getstream(user)
+  # get link stream from api and compare with database
+  if link_stream[0] != data[6]:
+    # update database
+    connection.checkupdate_ytlive(link_stream[0], data[0])
+    # send message
+    channel = m.client.get_channel(int(data[4]))
+    await channel.send(
+      f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```Live Stream Video! \n{link_stream[1]}``` {link_stream[0]}"
+    )
+  # get short link from api and compare with database
+  link_short = a.getshort(user)
+  if link_short[0] != data[7]:
+    # update database
+    connection.checkupdate_ytsr(link_short[0], data[0])
+    # send message
+    channel = m.client.get_channel(int(data[4]))
+    await channel.send(
+      f"Hello {channel.guild.default_role.mention} {m.emot[nub]} ```New Shorts! \n{link_short[1]}``` {link_short[0]}"
+    )
+
 
 
 # get token from .env file in same directory
